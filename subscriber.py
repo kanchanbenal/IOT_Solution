@@ -5,11 +5,11 @@ import json
 
 broker = 'broker.hivemq.com'
 topic = 'hotel/temperature'
-threshold = 25  # Temperature threshold for the alarm
-data = []  # List to store temperature readings
-latest_data_file = "latest_data.json"  # File to save latest temperature data
+threshold = 25  
+data = []  
+latest_data_file = "latest_data.json"  
 
-# Callback function to handle when the client connects to the MQTT broker
+# client connects to the MQTT broker
 def on_connect(client, userdata, flags, rc):
     print("Connected to MQTT Broker with result code " + str(rc))
     client.subscribe(topic)
@@ -20,7 +20,7 @@ def on_message(client, userdata, msg):
     timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     data.append((temperature, timestamp))
 
-    # Keep only the last 5 readings (5 minutes)
+    
     if len(data) > 5:
         data.pop(0)
 
